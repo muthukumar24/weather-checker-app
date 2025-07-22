@@ -235,22 +235,14 @@ class _WeatherScreenState extends State<WeatherScreen> {
                       scrollDirection: Axis.horizontal,
                       itemCount: data.length,
                       itemBuilder: (context, index) {
-                        final time =
-                            DateTime.parse(data['list'][index + 1]['dt_txt']);
-                        final hourlyFahrenheitTemperature = ((data['list']
-                                            [index + 1]['main']['temp'] -
-                                        273.15) *
-                                    9 /
-                                    5 +
-                                32)
-                            .toStringAsFixed(2);
+                        final time = DateTime.parse(data['list'][index + 1]['dt_txt']);
+                        final hourlyFahrenheitTemperature = ((data['list'][index + 1]['main']['temp'] -273.15) * 9 / 5 + 32).toStringAsFixed(2);
+                        
                         return HourlyForecastCard(
                           time: DateFormat.jm().format(time),
-                          icon: data['list'][index + 1]['weather'][0]['main'] ==
-                                      'Clouds' ||
-                                  data['list'][index + 1]['weather'][0]
-                                          ['main'] ==
-                                      'Rain'
+                          icon: data['list'][index + 1]['weather'][0]['main'] == 'Clouds' 
+                                ||
+                                data['list'][index + 1]['weather'][0]['main'] == 'Rain'
                               ? Icons.cloud
                               : Icons.sunny,
                           temperature: hourlyFahrenheitTemperature,
